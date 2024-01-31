@@ -1,3 +1,61 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["plugin:react/recommended", "standard", "next", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "indent": ["off"],
+    "no-undef": "off",
+    "no-unused-vars": "error",
+    "strict": 0,
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": "parens",
+        "assignment": "parens",
+        "return": "parens",
+        "arrow": "parens",
+        "condition": "ignore",
+        "logical": "ignore",
+        "prop": "ignore"
+      }
+    ],
+    "react/self-closing-comp": [
+      "warn",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/no-unknown-property": "off",
+    "no-multi-spaces": "error",
+    "react/jsx-closing-bracket-location": [1, "tag-aligned"],
+    "@next/next/no-img-element": "off",
+    "import/no-anonymous-default-export": "off",
+    "no-use-before-define": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "no-unneeded-ternary": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "camelcase": "off",
+    "dot-notation": ["off"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
