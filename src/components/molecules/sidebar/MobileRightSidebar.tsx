@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IconGridDots } from "@tabler/icons-react";
 import { Box, Typography, Drawer, IconButton } from "@mui/material";
 
-import QuickLinks from "@/components/organisms/Links/QuickLinks";
+import QuickLinks from "@/components/atoms/Links/QuickLinks";
 
 const MobileRightSidebar = () => {
   const [showDrawer, setShowDrawer] = useState(false);

@@ -1,4 +1,10 @@
-import { Grid, Button, Typography, Divider } from "@mui/material";
+import {
+  Grid,
+  Button,
+  Typography,
+  Divider,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Stack } from "@mui/system";
 import Link from "next/link";
@@ -43,6 +49,7 @@ const FormPost = ({ post, update = false, setSearch, setPost }: Props) => {
   const { lengthPost, addPost, updatePost } = usePostsContext();
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
   const formik = useFormik({
     initialValues: {
       userId: 1,
@@ -203,7 +210,7 @@ const FormPost = ({ post, update = false, setSearch, setPost }: Props) => {
             >
               <CustomFormLabel
                 htmlFor="body"
-                sx={{ mt: -10, mb: { xs: "-10px", sm: 0 } }}
+                sx={{ mt: lgUp ? -10 : 0, mb: { xs: "-10px", sm: 0 } }}
               >
                 Descripción
               </CustomFormLabel>

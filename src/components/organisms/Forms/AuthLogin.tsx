@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Button, FormGroup, Stack } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -7,15 +7,20 @@ import CustomTextField from "@/components/atoms/textField/CustomTextField";
 import Link from "next/link";
 import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/router";
+import AlertSubmmit from "@/components/atoms/alert/AlertSubmmit";
 
 const AuthLogin = ({ title, subtitle, subtext }: any) => {
   const { login } = useAuth();
+  const [submitError, setSubmitError] = useState(false);
   const router = useRouter();
   const initialValues = {
     username: "",
     password: "",
   };
 
+  const handleClose = () => {
+    setSubmitError(false);
+  };
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("El nombre de usuario es obligatorio"),
     password: Yup.string().required("La contraseña es obligatoria"),
@@ -29,6 +34,7 @@ const AuthLogin = ({ title, subtitle, subtext }: any) => {
         await login(values?.username, values?.password);
         router.push("/dashboard");
       } catch (error) {
+        setSubmitError(true);
         console.error("Error al iniciar sesión:", error);
       }
     },
@@ -99,6 +105,12 @@ const AuthLogin = ({ title, subtitle, subtext }: any) => {
         </Button>
       </Stack>
       {subtitle}
+      <AlertSubmmit
+        open={submitError}
+        handleClose={handleClose}
+        title={"Email o Contraseña incorrectas."}
+        severity={"error"}
+      />
     </>
   );
 };

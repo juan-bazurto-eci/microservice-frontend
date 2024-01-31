@@ -1,38 +1,132 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# POSTS APP (Prueba Técnica)
 
-## Getting Started
+El objetivo de este proyecto es desarrollar una aplicación web con los siguientes requerimientos:
 
-First, run the development server:
+- Al iniciar listé los posts paginados en un data table
+- Cada post debe tener el botón de eliminar
+- Se deben crear los formularios respectivos para publicar y actualizar un Post
+- Mostrar una ventana (modal) de notificación para cualquiera de las operaciones realizadas.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## Primeros pasos
+
+Estas instrucciones te ayudarán a obtener una copia del proyecto en funcionamiento en tu máquina local para desarrollo y pruebas. Consulta la sección de "Despliegue" para obtener notas sobre cómo implementar el proyecto en un sistema en vivo.
+
+### Prerrequisitos
+
+Servicios que necesitas instalar y cómo hacerlo.
+
+- [Node.js](https://nodejs.org/docs/latest/api/)
+- [DockerDesktop](https://www.docker.com/products/docker-desktop/)
+
+### Instalación
+
+Sigue estos pasos para configurar tu entorno de desarrollo:
+
+1. Clona el repositorio:
+
+   ```bash
+   https://github.com/juan-bazurto-eci/posts-app.git
+   ```
+
+2. Navega al directorio del proyecto
+
+   ```
+   cd posts-app
+   ```
+
+3. Hacemos la construccion del proyecto
+
+   ```
+   npm install
+   ```
+
+## Despliegue
+
+Ejecutamos los siguientes comandos
+
+    # para ejecutar en modo dev
+    npm run dev
+
+    # para ejecutar en qa o producción env. Espera ejecutar esto en docker
+    npm run start
+
+Accedemos a la siguiente URL
+
+     https://localhost:3000/
+
+Para acceder al dashboard el usuario y contraseña son
+
+    # Email
+    user@post.co
+    # Contraseña
+    user123
+
+## Ejecución de las pruebas
+
+El servidor responde a todas las funciones
+
+![](README/local.png)
+
+## Diseño de la aplicación
+
+En realidad, todas las páginas de un mismo proyecto comparten la misma estructura. Hago buen uso de algunas características de Nextjs y algunos componentes personalizados para organizar las páginas:
+
+#### pages/\_document.tsx
+
+Esto es proporcionado por el framework Nextjs. Define el esqueleto raíz de cualquier página. Por ejemplo, contiene marcas como `<html>`, `<head>`, `<body>`.
+
+#### components/templates/FullLayout.tsx
+
+Este es un componente personalizado, que es más acerca de la apariencia de la estructura de cualquier página. Para una página web típica, normalmente necesitamos definir la cabecera, el pie de página y dónde mostrar el contenido principal.
+
+#### Página individual
+
+Aquí es donde definimos el contenido real de la página. Una página necesita incluir el componente Layout, este describe el aspecto de la página.
+
+Así es como se ve en el método de renderizado de una página:
+
+```js
+render() {
+  return (
+    <Layout>
+      <p>Hello World</p>
+    </Layout>,
+  );
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 💡 La página de error personalizada
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Nextjs nos permite definir nuestra propia página de error. La página de error personalizada se encuentra en [/pages/404.tsx](https://github.com/juan-bazurto-eci/posts-app/blob/main/src/pages/404.tsx). Su aspecto es muy similar al de las páginas normales.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Despliegue
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### 💡 Uso de Docker para la estrategia de despliegue
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Se crea un dockerfile, para el despliegue en local de la aplicación
 
-## Learn More
+#### Archivos relacionados
 
-To learn more about Next.js, take a look at the following resources:
+- [Dockerfile](https://github.com/juan-bazurto-eci/posts-app/blob/main/Dockerfile)
+- [.dockerignore](https://github.com/juan-bazurto-eci/posts-app/blob/main/.dockerignore)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 💡 Uso de Vercel para despliegue en web
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Se crea un projecto y se configura en Vercel para el despliegue de la aplicación.
 
-## Deploy on Vercel
+- [Posts App Web]()
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Construido con
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Node.js](https://nodejs.org/)
+- [Typescript](https://www.typescriptlang.org/) - Lenguaje de programación principal
+- [npm.js](https://www.npmjs.com/) - Gestión de dependencias y construcción del proyecto
+- Git - Control de versiones
+- HTML, JavaScript - Interfaz de usuario
+- [React](https://es.react.dev/) - Interfaz de usuario
+- [Next.js](https://nextjs.org/) - Interfaz de usuario
+- [Vercel](https://vercel.com/) - Despliegue
+
+## Autor
+
+- **Juan Camilo Bazurto** - [Linkedin](https://www.linkedin.com/in/juan-camilo-b-b65379105/) - [GitHub](https://github.com/juan-bazurto-eci)
