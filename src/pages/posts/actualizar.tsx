@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 
-// components
 import Breadcrumb from "@/components/organisms/Breadcrumb/Breadcrumb";
 import ParentCard from "@/components/molecules/shared/ParentCard";
 import PageContainer from "@/components/container/PageContainer";

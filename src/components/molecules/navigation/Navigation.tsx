@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button } from "@mui/material";
 import Link from "next/link";
 
-const AppDD = () => {
+const Navigation = () => {
   return (
     <>
       <Box>
@@ -38,4 +38,4 @@ const AppDD = () => {
   );
 };
 
-export default AppDD;
+export default Navigation;

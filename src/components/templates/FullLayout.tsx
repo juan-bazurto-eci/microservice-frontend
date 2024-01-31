@@ -23,7 +23,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-// const FullLayout: FC = ({children}) => {
 const FullLayout: React.FC<Props> = ({ children }) => {
   const customizer = useSelector((state: AppState) => state.customizer);
   const theme = useTheme();

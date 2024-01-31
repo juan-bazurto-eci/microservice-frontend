@@ -1,4 +1,4 @@
-# POSTS APP (Prueba Técnica)
+# [POSTS APP](https://posts-app-sigma.vercel.app/) (Prueba Técnica)
 
 El objetivo de este proyecto es desarrollar una aplicación web con los siguientes requerimientos:
 
@@ -63,9 +63,13 @@ Para acceder al dashboard el usuario y contraseña son
 
 ## Ejecución de las pruebas
 
-El servidor responde a todas las funciones
+Con el siguiete comando podras ejecutar las pruebas unitarias
 
-![](README/local.png)
+    npm run test
+
+El siguiente es el coverage de las pruebas
+
+![](public/images/readme/coverage.png)
 
 ## Diseño de la aplicación
 
@@ -114,7 +118,7 @@ Se crea un dockerfile, para el despliegue en local de la aplicación
 
 Se crea un projecto y se configura en Vercel para el despliegue de la aplicación.
 
-- [Posts App Web]()
+- [Posts App Web](https://posts-app-sigma.vercel.app/)
 
 ## Construido con
 

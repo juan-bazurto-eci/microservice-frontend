@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { IconSearch, IconTrash } from "@tabler/icons-react";
-
+import Link from "next/link";
 interface EnhancedTableToolbarProps {
   numSelected?: number;
   handleSearch?: React.ChangeEvent<HTMLInputElement> | any;
@@ -86,12 +86,16 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={2}>
             {handleButtonClick ? (
               <Button onClick={handleButtonClick} fullWidth>
                 Buscar
               </Button>
-            ) : null}
+            ) : (
+              <Link href="/posts/publicar">
+                <Button fullWidth>Publicar</Button>
+              </Link>
+            )}
           </Grid>
         </Grid>
       )}

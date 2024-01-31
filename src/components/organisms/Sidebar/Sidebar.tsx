@@ -99,12 +99,6 @@ const Sidebar = () => {
       PaperProps={{
         sx: {
           width: customizer.SidebarWidth,
-
-          // backgroundColor:
-          //   customizer.activeMode === 'dark'
-          //     ? customizer.darkBackground900
-          //     : customizer.activeSidebarBg,
-          // color: customizer.activeSidebarBg === '#ffffff' ? '' : 'white',
           border: "0 !important",
           boxShadow: (theme) => theme.shadows[8],
         },
@@ -113,8 +107,8 @@ const Sidebar = () => {
       {/* ------------------------------------------- */}
       {/* Logo */}
       {/* ------------------------------------------- */}
-      <Box px={10}>
-        <Logo width={100} height={100} href="/dashboard" />
+      <Box px={4} mt={2}>
+        <Logo width={200} height={100} href="/dashboard" />
       </Box>
       {/* ------------------------------------------- */}
       {/* Sidebar For Mobile */}
