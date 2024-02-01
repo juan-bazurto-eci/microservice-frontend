@@ -41,7 +41,10 @@ export const PostsProvider = ({ children }: any) => {
     setPostsProvider((prevPosts) =>
       prevPosts.filter((post) => post?.id !== id)
     );
-    localStorage.setItem("posts", JSON.stringify([...posts]));
+    localStorage.setItem(
+      "posts",
+      JSON.stringify([...posts.filter((post) => post?.id !== id)])
+    );
   };
 
   const searchPost = (id: number) => {
