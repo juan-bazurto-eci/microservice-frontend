@@ -11,6 +11,7 @@ import FormPost from "@/components/organisms/Forms/FormPost";
 import { PostType } from "@/types/postType";
 import { GetPostDTO } from "@/models/ConsultPostDTO";
 import axios from "axios";
+import { usePostsContext } from "@/context/postsContext";
 
 const BCrumb = [
   {
@@ -27,6 +28,7 @@ const BCrumb = [
 ];
 
 const UpdatePost = () => {
+  const { searchPost } = usePostsContext();
   const [search, setSearch] = useState("");
   const [post, setPost] = useState<PostType | undefined>();
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -50,7 +52,13 @@ const UpdatePost = () => {
       setPost(GetPostDTO(response?.data ?? {}));
       setSubmitSuccess(true);
     } catch (error) {
-      setSubmitError(true);
+      const post = searchPost(parseInt(search));
+      if (post) {
+        setPost(post);
+        setSubmitSuccess(true);
+      } else {
+        setSubmitError(true);
+      }
     }
   };
 

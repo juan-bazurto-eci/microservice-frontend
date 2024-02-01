@@ -9,6 +9,7 @@ export type PostContextType = {
   setPosts: (posts: PostType[]) => void;
   updatePost: (updatedPost: PostType) => void;
   removePost: (id: number) => void;
+  searchPost: (id: number) => PostType | undefined;
 };
 
 const PostsContext = createContext<PostContextType>({
@@ -18,6 +19,9 @@ const PostsContext = createContext<PostContextType>({
   updatePost: (updatedPost) => {},
   setPosts: () => {},
   removePost: (id) => {},
+  searchPost: (id) => {
+    return {};
+  },
 });
 
 export const PostsProvider = ({ children }: any) => {
@@ -38,6 +42,10 @@ export const PostsProvider = ({ children }: any) => {
       prevPosts.filter((post) => post?.id !== id)
     );
     localStorage.setItem("posts", JSON.stringify([...posts]));
+  };
+
+  const searchPost = (id: number) => {
+    return posts.find((post) => post?.id === id);
   };
 
   const updatePost = (updatedPost: PostType) => {
@@ -67,6 +75,7 @@ export const PostsProvider = ({ children }: any) => {
         addPost,
         setPosts,
         removePost,
+        searchPost,
         updatePost,
       }}
     >

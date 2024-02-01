@@ -70,6 +70,7 @@ const FormPost = ({ post, update = false, setSearch, setPost }: Props) => {
             })
           : await axios.post("/api/posts/add", {
               post: {
+                userId: values.userId,
                 title: values.title,
                 body: values.body,
               },
@@ -95,7 +96,30 @@ const FormPost = ({ post, update = false, setSearch, setPost }: Props) => {
         }
         resetForm();
       } catch (error) {
-        setSubmitError(true);
+        const id = post?.id ?? 0;
+        if (setSearch && setPost) {
+          setSearch("");
+          setPost({
+            id: undefined,
+            userId: undefined,
+            title: undefined,
+            body: undefined,
+          });
+        }
+        if (id > 100 && update) {
+          updatePost(
+            GetPostDTO({
+              id: post?.id,
+              userId: values.userId,
+              title: values.title,
+              body: values.body,
+            })
+          );
+          setSubmitSuccess(true);
+          resetForm();
+        } else {
+          setSubmitError(true);
+        }
       }
     },
   });

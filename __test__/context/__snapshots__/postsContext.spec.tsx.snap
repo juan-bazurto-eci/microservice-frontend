@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostsProvider and usePostsContext renders PostsProvider and usePostsContext 1`] = `
+<div>
+  <div>
+    <button>
+      Add Post
+    </button>
+    <button>
+      Update Post
+    </button>
+    <button>
+      Remove Post
+    </button>
+  </div>
+</div>
+`;

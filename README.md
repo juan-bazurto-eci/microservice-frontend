@@ -69,11 +69,31 @@ Con el siguiete comando podras ejecutar las pruebas unitarias
 
 El siguiente es el coverage de las pruebas
 
+    npm run coverage
+
 ![](public/images/readme/coverage.png)
 
 ## Diseño de la aplicación
 
 En realidad, todas las páginas de un mismo proyecto comparten la misma estructura. Hago buen uso de algunas características de Nextjs y algunos componentes personalizados para organizar las páginas:
+
+### pages/dashboard.tsx
+
+Esta página es en la cual sé enlistan los posts y la primera página a la que entra el usuario cuando se loggea, en el buscador podremos filtrar los posts por título y el botón de publicar nos llevara la página para publicar un post.
+
+![](public/images/readme/dashboard.png)
+
+### pages/posts/publicar.tsx
+
+Esta página es en la cual el usuario podrá publicar nuevos posts, tendrá que llenar el formulario y guardar el post. Los posts luego de publicados se podrán visualizar en el dashboard.
+
+![](public/images/readme/publicar.png)
+
+### pages/posts/actualizar.tsx
+
+Esta página es en la cual el usuario podrá actualizar los posts, primero el usuario tiene que buscar el ID del post que quiere actualizar, luego tendrá que llenar o hacer cambios en el formulario y guardar el post. Los posts luego de actualizados se podrán visualizar en el dashboard.
+
+![](public/images/readme/actualizar.png)
 
 #### pages/\_document.tsx
 
