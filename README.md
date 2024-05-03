@@ -27,8 +27,8 @@ Sigue estos pasos para configurar el entorno de desarrollo:
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/tu-repositorio.git
-   cd tu-repositorio
+   git clone https://github.com/juan-bazurto-eci/microservice-frontend.git
+   cd microservice-frontend
    ```
 
 2. Instala las dependencias:
@@ -64,13 +64,9 @@ npm run test
 
 ## Autores
 
-- **Tu Nombre** - *Desarrollo inicial* - [TuPerfil](TuURLdeGithub)
+- **Miguel Salamanca** - [Linkedin](https://www.linkedin.com/in/juan-camilo-b-b65379105/) - [GitHub](https://github.com/juan-bazurto-eci)
+- **Juan Camilo Bazurto** - [Linkedin](https://www.linkedin.com/in/juan-camilo-b-b65379105/) - [GitHub](https://github.com/juan-bazurto-eci)
 
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - vea el archivo [LICENSE.md](LICENSE.md) para más detalles.
-
-## Reconocimientos
-
-- Agradecimientos a todos los colaboradores del proyecto.
-- Inspiración, fuentes de datos, etc.
