@@ -10,29 +10,11 @@ const Navigation = () => {
           color="inherit"
           sx={{ color: (theme) => theme.palette.text.secondary }}
           variant="text"
-          href="/dashboard"
+          href="/"
           component={Link}
         >
           Inicio
         </Button>
-        <Button
-          color="inherit"
-          sx={{ color: (theme) => theme.palette.text.secondary }}
-          variant="text"
-          href="/posts"
-          component={Link}
-        >
-          Posts
-        </Button>
-        {/* <Button
-          color="inherit"
-          sx={{ color: (theme) => theme.palette.text.secondary }}
-          variant="text"
-          href="/usuarios"
-          component={Link}
-        >
-          Usuarios
-        </Button> */}
       </Box>
     </>
   );

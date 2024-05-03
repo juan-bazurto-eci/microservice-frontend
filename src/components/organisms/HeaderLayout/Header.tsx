@@ -1,21 +1,16 @@
-import {
-  IconButton,
-  Box,
-  AppBar,
-  useMediaQuery,
-  Toolbar,
-  styled,
-  Stack,
-} from "@mui/material";
-import { AppState, useSelector, useDispatch } from "@/store/Store";
-import {
-  toggleSidebar,
-  toggleMobileSidebar,
-} from "@/store/customizer/CustomizerSlice";
-import { IconMenu2 } from "@tabler/icons-react";
 import Navigation from "@/components/molecules/navigation/Navigation";
 import MobileRightSidebar from "@/components/molecules/sidebar/MobileRightSidebar";
-import Profile from "@/components/molecules/profile/Profile";
+import { AppState, useSelector } from "@/store/Store";
+import {
+  AppBar,
+  Box,
+  Button,
+  Stack,
+  Toolbar,
+  styled,
+  useMediaQuery,
+} from "@mui/material";
+import Link from "next/link";
 
 const Header = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
@@ -23,7 +18,6 @@ const Header = () => {
 
   // drawer
   const customizer = useSelector((state: AppState) => state.customizer);
-  const dispatch = useDispatch();
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     boxShadow: "none",
@@ -45,17 +39,6 @@ const Header = () => {
         {/* ------------------------------------------- */}
         {/* Toggle Button Sidebar */}
         {/* ------------------------------------------- */}
-        <IconButton
-          color="inherit"
-          aria-label="menu"
-          onClick={
-            lgUp
-              ? () => dispatch(toggleSidebar())
-              : () => dispatch(toggleMobileSidebar())
-          }
-        >
-          <IconMenu2 size="20" />
-        </IconButton>
         {lgUp ? (
           <>
             <Navigation />
@@ -68,7 +51,12 @@ const Header = () => {
           {/* Toggle Right Sidebar for mobile */}
           {/* ------------------------------------------- */}
           {lgDown ? <MobileRightSidebar /> : null}
-          <Profile />
+          <Button variant="contained" href="/iniciar-sesion" component={Link}>
+            Iniciar Sesión
+          </Button>
+          <Button variant="contained" href="/registrarse" component={Link}>
+            Registrarse
+          </Button>
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>

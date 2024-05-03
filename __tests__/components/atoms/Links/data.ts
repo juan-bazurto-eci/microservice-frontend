@@ -5,16 +5,8 @@ interface LinkType {
 
 const pageLinks: LinkType[] = [
   {
-    href: "/dashboard",
+    href: "/",
     title: "Inicio",
-  },
-  {
-    title: "Publicar",
-    href: "/posts/publicar",
-  },
-  {
-    title: "Actualizar",
-    href: "/posts/actualizar",
   },
 ];
 

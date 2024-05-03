@@ -5,7 +5,6 @@ import {
   toggleMobileSidebar,
 } from "@/store/customizer/CustomizerSlice";
 import Scrollbar from "@/components/molecules/scrollbar/Scrollbar";
-import { Profile } from "@/components/molecules/sidebarProfile/Profile";
 import SidebarItems from "@/components/molecules/sidebar/SidebarItems";
 import Logo from "@/components/atoms/logo/Logo";
 
@@ -83,7 +82,6 @@ const Sidebar = () => {
               {/* ------------------------------------------- */}
               <SidebarItems />
             </Scrollbar>
-            <Profile />
           </Box>
         </Drawer>
       </Box>

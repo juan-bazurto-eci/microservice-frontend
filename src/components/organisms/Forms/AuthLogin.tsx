@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { Box, Typography, Button, FormGroup, Stack } from "@mui/material";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import AlertSubmmit from "@/components/atoms/alert/AlertSubmmit";
 import CustomFormLabel from "@/components/atoms/label/CustomFormLabel";
 import CustomTextField from "@/components/atoms/textField/CustomTextField";
-import Link from "next/link";
-import { useAuth } from "@/context/authContext";
+import { Box, Button, FormGroup, Stack, Typography } from "@mui/material";
+import { useFormik } from "formik";
 import { useRouter } from "next/router";
-import AlertSubmmit from "@/components/atoms/alert/AlertSubmmit";
+import { useState } from "react";
+import * as Yup from "yup";
 
 const AuthLogin = ({ title, subtitle, subtext }: any) => {
-  const { login } = useAuth();
   const [submitError, setSubmitError] = useState(false);
   const router = useRouter();
   const initialValues = {
@@ -29,9 +26,8 @@ const AuthLogin = ({ title, subtitle, subtext }: any) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async (values: any) => {
+    onSubmit: async () => {
       try {
-        await login(values?.username, values?.password);
         router.push("/dashboard");
       } catch (error) {
         setSubmitError(true);
@@ -85,14 +81,6 @@ const AuthLogin = ({ title, subtitle, subtext }: any) => {
           my={2}
         >
           <FormGroup />
-          <Typography
-            component={Link}
-            href="/"
-            fontWeight="500"
-            sx={{ textDecoration: "none", color: "primary.main" }}
-          >
-            ¿Ha olvidado su contraseña?
-          </Typography>
         </Stack>
         <Button
           type="submit"

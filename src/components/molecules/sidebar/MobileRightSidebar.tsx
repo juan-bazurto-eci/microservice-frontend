@@ -40,7 +40,7 @@ const MobileRightSidebar = () => {
       >
         <Box p={3} pb={0}>
           <Typography variant="h5" fontWeight={600}>
-            Posts App
+            Ecom-Shop
           </Typography>
         </Box>
 

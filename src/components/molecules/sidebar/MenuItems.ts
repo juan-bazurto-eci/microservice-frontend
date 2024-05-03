@@ -1,9 +1,5 @@
+import { IconAperture } from "@tabler/icons-react";
 import { uniqueId } from "lodash";
-import {
-  IconFileDescription,
-  IconFileDots,
-  IconAperture,
-} from "@tabler/icons-react";
 
 interface MenuitemsType {
   [x: string]: any;
@@ -23,30 +19,14 @@ interface MenuitemsType {
 const Menuitems: MenuitemsType[] = [
   {
     navlabel: true,
-    subheader: "Posts App",
+    subheader: "Ecom-Shop",
   },
 
   {
     id: uniqueId(),
     title: "Inicio",
     icon: IconAperture,
-    href: "/dashboard",
-  },
-  {
-    navlabel: true,
-    subheader: "Posts",
-  },
-  {
-    id: uniqueId(),
-    title: "Publicar",
-    icon: IconFileDescription,
-    href: "/posts/publicar",
-  },
-  {
-    id: uniqueId(),
-    title: "Actualizar",
-    icon: IconFileDots,
-    href: "/posts/actualizar",
+    href: "/",
   },
 ];
 

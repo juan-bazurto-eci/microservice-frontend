@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
-import { AppProps } from "next/app";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import { AppProps } from "next/app";
+import Head from "next/head";
 import { Provider } from "react-redux";
-
+import "../_mockApis";
 // CSS FILES
-import createEmotionCache from "@/createEmotionCache";
-import { ThemeSettings } from "@/theme/Theme";
-import Store from "@/store/Store";
-import FullLayout from "@/components/templates/FullLayout";
 import BlankLayout from "@/components/templates/BlankLayout";
-import { useAuth, AuthProvider } from "@/context/authContext";
-import { PostsProvider } from "@/context/postsContext";
-
+import FullLayout from "@/components/templates/FullLayout";
+import createEmotionCache from "@/createEmotionCache";
+import Store from "@/store/Store";
+import { ThemeSettings } from "@/theme/Theme";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
@@ -34,21 +30,12 @@ const MyApp = (props: MyAppProps) => {
     pageProps,
   }: any = props;
   const theme = ThemeSettings();
-  const { user } = useAuth();
-  const [layout, setLayout] = useState<string>("Blank");
-  useEffect(() => {
-    if (user) {
-      setLayout(Component.layout || "Full");
-    } else {
-      setLayout("Blank");
-    }
-  }, [user, Component.layout]);
-  const Layout = layouts[layout] || FullLayout;
+  const Layout = layouts[Component.layout] || FullLayout;
   return (
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>Posts App</title>
+        <title>Ecommerce</title>
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -64,11 +51,7 @@ MyApp.displayName = "MyApp";
 
 const WrappedApp = (props: MyAppProps) => (
   <Provider store={Store}>
-    <PostsProvider>
-      <AuthProvider>
-        <MyApp {...props} />
-      </AuthProvider>
-    </PostsProvider>
+    <MyApp {...props} />
   </Provider>
 );
 

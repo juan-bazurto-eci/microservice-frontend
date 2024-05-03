@@ -10,11 +10,7 @@ jest.mock(
 );
 
 jest.mock("./data", () => ({
-  pageLinks: [
-    { title: "Inicio", href: "/dashboard" },
-    { title: "Publicar", href: "/posts/publicar" },
-    { title: "Actualizar", href: "/posts/actualizar" },
-  ],
+  pageLinks: [{ title: "Inicio", href: "/dashboard" }],
 }));
 
 describe("QuickLinks component", () => {

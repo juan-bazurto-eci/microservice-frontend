@@ -1,6 +1,5 @@
-import { styled, Container, Box, useTheme } from "@mui/material";
+import { Box, Container, styled, useTheme } from "@mui/material";
 import { AppState, useSelector } from "../../store/Store";
-import Sidebar from "../organisms/Sidebar/Sidebar";
 import Header from "../organisms/HeaderLayout/Header";
 
 const MainWrapper = styled("div")(() => ({
@@ -30,10 +29,6 @@ const FullLayout: React.FC<Props> = ({ children }) => {
   return (
     <MainWrapper>
       {/* ------------------------------------------- */}
-      {/* Sidebar */}
-      {/* ------------------------------------------- */}
-      <Sidebar />
-      {/* ------------------------------------------- */}
       {/* Main Wrapper */}
       {/* ------------------------------------------- */}
       <PageWrapper
@@ -53,7 +48,7 @@ const FullLayout: React.FC<Props> = ({ children }) => {
         {/* PageContent */}
         <Container
           sx={{
-            maxWidth: customizer.isLayout === "boxed" ? "lg" : "100%!important",
+            maxWidth: "100%!important",
           }}
         >
           {/* ------------------------------------------- */}

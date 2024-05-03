@@ -1,5 +1,5 @@
 {
-  "name": "technical-test",
+  "name": "microservice-front",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -24,7 +24,9 @@
     "@types/node": "20.3.1",
     "@types/react": "18.2.13",
     "@types/react-dom": "18.2.6",
-    "axios": "^1.4.0",
+    "axios": "^1.6.8",
+    "chance": "^1.1.11",
+    "date-fns": "^3.6.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "firebase": "^10.4.0",
@@ -44,6 +46,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.0",
     "@testing-library/react": "^14.2.0",
+    "@types/chance": "^1.1.6",
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",

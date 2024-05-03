@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Logo = ({
-  logo = "/images/logos/logo.webp",
+  logo = "/images/logos/logo.png",
   height = 100,
   width = 300,
   href = "/",

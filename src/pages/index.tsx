@@ -1,58 +1,37 @@
-import { Grid, Box, Card } from "@mui/material";
+import React from "react";
+import { Box } from "@mui/material";
 import PageContainer from "@/components/container/PageContainer";
-import Logo from "@/components/atoms/logo/Logo";
-import AuthLogin from "@/components/organisms/Forms/AuthLogin";
-import withNoAuthentication from "@/hoc/withNoAuthentication";
+import Breadcrumb from "@/components/organisms/Breadcrumb/Breadcrumb";
+import AppCard from "@/components/molecules/shared/AppCard";
+import ProductList from "@/components/organisms/ProductList/ProductList";
+import ProductSidebar from "@/components/organisms/ProductList/ProductSidebar";
 
-const Login = () => {
+const Ecommerce = () => {
+  const [isMobileSidebarOpen, setMobileSidebarOpen] = React.useState(true);
+
   return (
     <PageContainer>
-      <Box
-        sx={{
-          position: "relative",
-          "&:before": {
-            content: '""',
-            background: "radial-gradient(#d2f1df, #d3d7fa, #bad8f4)",
-            backgroundSize: "400% 400%",
-            animation: "gradient 15s ease infinite",
-            position: "absolute",
-            height: "100%",
-            width: "100%",
-            opacity: "0.3",
-          },
-        }}
-      >
-        <Grid
-          container
-          spacing={0}
-          justifyContent="center"
-          sx={{ height: "100vh" }}
-        >
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            lg={5}
-            xl={4}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Card
-              elevation={9}
-              sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "450px" }}
-            >
-              <Box display="flex" alignItems="center" justifyContent="center">
-                <Logo />
-              </Box>
-              <AuthLogin />
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
+      {/* breadcrumb */}
+      <Breadcrumb title="Ecom-Shop" />
+      <AppCard>
+        {/* ------------------------------------------- */}
+        {/* Left part */}
+        {/* ------------------------------------------- */}
+        <ProductSidebar
+          isMobileSidebarOpen={isMobileSidebarOpen}
+          onSidebarClose={() => setMobileSidebarOpen(false)}
+        />
+        {/* ------------------------------------------- */}
+        {/* Right part */}
+        {/* ------------------------------------------- */}
+        <Box p={3} flexGrow={1}>
+          <ProductList
+            onClick={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
+          />
+        </Box>
+      </AppCard>
     </PageContainer>
   );
 };
 
-Login.layout = "Blank";
-export default withNoAuthentication(Login);
+export default Ecommerce;

@@ -2,9 +2,7 @@ import million from "million/compiler";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  env: {
-    NEXT_PUBLIC_POSTS_URL: process.env.NEXT_PUBLIC_POSTS_URL,
-  },
+  env: {},
   reactStrictMode: true,
   pageExtensions: [
     "mdx",

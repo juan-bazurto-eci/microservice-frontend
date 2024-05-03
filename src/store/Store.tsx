@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import CustomizerReducer from "./customizer/CustomizerSlice";
+import EcommerceReducer from "./apps/eCommerce/ECommerceSlice";
 import { combineReducers } from "redux";
 import {
   useDispatch as useAppDispatch,
@@ -10,11 +11,13 @@ import {
 export const store = configureStore({
   reducer: {
     customizer: CustomizerReducer,
+    ecommerceReducer: EcommerceReducer,
   },
 });
 
 const rootReducer = combineReducers({
   customizer: CustomizerReducer,
+  ecommerceReducer: EcommerceReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
