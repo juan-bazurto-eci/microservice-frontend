@@ -1,5 +1,7 @@
-import Navigation from "@/components/molecules/navigation/Navigation";
+import Cart from "@/components/molecules/cart/Cart";
+import Profile from "@/components/molecules/profile/Profile";
 import MobileRightSidebar from "@/components/molecules/sidebar/MobileRightSidebar";
+import { useAuth } from "@/context/AuthContext";
 import { AppState, useSelector } from "@/store/Store";
 import {
   AppBar,
@@ -13,6 +15,7 @@ import {
 import Link from "next/link";
 
 const Header = () => {
+  const { isUserLoggedIn } = useAuth();
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
   const lgDown = useMediaQuery((theme: any) => theme.breakpoints.down("lg"));
 
@@ -39,11 +42,7 @@ const Header = () => {
         {/* ------------------------------------------- */}
         {/* Toggle Button Sidebar */}
         {/* ------------------------------------------- */}
-        {lgUp ? (
-          <>
-            <Navigation />
-          </>
-        ) : null}
+        {lgUp ? <>{/* <Navigation /> */}</> : null}
 
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
@@ -51,12 +50,23 @@ const Header = () => {
           {/* Toggle Right Sidebar for mobile */}
           {/* ------------------------------------------- */}
           {lgDown ? <MobileRightSidebar /> : null}
-          <Button variant="contained" href="/iniciar-sesion" component={Link}>
-            Iniciar Sesión
-          </Button>
-          <Button variant="contained" href="/registrarse" component={Link}>
-            Registrarse
-          </Button>
+          <Cart />
+          {isUserLoggedIn() ? (
+            <Profile />
+          ) : (
+            <>
+              <Button
+                variant="contained"
+                href="/iniciar-sesion"
+                component={Link}
+              >
+                Iniciar Sesión
+              </Button>
+              <Button variant="contained" href="/registrarse" component={Link}>
+                Registrarse
+              </Button>
+            </>
+          )}
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>

@@ -11,6 +11,7 @@ import FullLayout from "@/components/templates/FullLayout";
 import createEmotionCache from "@/createEmotionCache";
 import Store from "@/store/Store";
 import { ThemeSettings } from "@/theme/Theme";
+import { AuthProvider } from "@/context/AuthContext";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
@@ -51,7 +52,9 @@ MyApp.displayName = "MyApp";
 
 const WrappedApp = (props: MyAppProps) => (
   <Provider store={Store}>
-    <MyApp {...props} />
+    <AuthProvider>
+      <MyApp {...props} />
+    </AuthProvider>
   </Provider>
 );
 

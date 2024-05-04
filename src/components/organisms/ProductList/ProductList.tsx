@@ -184,7 +184,7 @@ const ProductList = ({ onClick }: Props) => {
                       sx={{
                         borderRadius: (theme) => theme.shape.borderRadius / 5,
                       }}
-                    ></Skeleton>
+                    />
                   </>
                 ) : (
                   <BlankCard className="hoverCard">
@@ -250,15 +250,15 @@ const ProductList = ({ onClick }: Props) => {
             <Grid item xs={12} lg={12} md={12} sm={12}>
               <Box textAlign="center" mt={6}>
                 <Image src={emptyCart} alt="cart" width={200} />
-                <Typography variant="h2">There is no Product</Typography>
+                <Typography variant="h2">No existe ningún producto</Typography>
                 <Typography variant="h6" mb={3}>
-                  The Product you are searching is no longer available.
+                  El producto que busca ya no está disponible.
                 </Typography>
                 <Button
                   variant="contained"
                   onClick={() => dispatch(filterReset())}
                 >
-                  Try Again
+                  Inténtalo de nuevo
                 </Button>
               </Box>
             </Grid>

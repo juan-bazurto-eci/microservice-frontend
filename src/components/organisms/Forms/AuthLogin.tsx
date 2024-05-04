@@ -1,13 +1,16 @@
 import AlertSubmmit from "@/components/atoms/alert/AlertSubmmit";
 import CustomFormLabel from "@/components/atoms/label/CustomFormLabel";
 import CustomTextField from "@/components/atoms/textField/CustomTextField";
+import { useAuth } from "@/context/AuthContext";
 import { Box, Button, FormGroup, Stack, Typography } from "@mui/material";
+import axios from "axios";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as Yup from "yup";
 
 const AuthLogin = ({ title, subtitle, subtext }: any) => {
+  const { login } = useAuth();
   const [submitError, setSubmitError] = useState(false);
   const router = useRouter();
   const initialValues = {
@@ -26,9 +29,18 @@ const AuthLogin = ({ title, subtitle, subtext }: any) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async () => {
+    onSubmit: async (values) => {
       try {
-        router.push("/dashboard");
+        const response = await axios.post(
+          "http://localhost:8080/client/login",
+          {
+            email: values.username,
+            password: values.password,
+          }
+        );
+        console.log("Inicio de sesión exitoso:", response.data);
+        login(response.data.clientResponseDTO);
+        router.push("/");
       } catch (error) {
         setSubmitError(true);
         console.error("Error al iniciar sesión:", error);

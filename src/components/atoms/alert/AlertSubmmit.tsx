@@ -7,6 +7,7 @@ interface Props {
   open: boolean;
   handleClose: () => void;
   dangerouslySetInnerHTML?: boolean;
+  duration?: number;
 }
 
 const AlertSubmmit = ({
@@ -15,13 +16,14 @@ const AlertSubmmit = ({
   open,
   handleClose,
   dangerouslySetInnerHTML = false,
+  duration = 6000,
 }: Props) => {
   return (
     <React.Fragment>
       <Snackbar
         open={open}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        autoHideDuration={6000}
+        autoHideDuration={duration}
         onClose={handleClose}
       >
         <Alert

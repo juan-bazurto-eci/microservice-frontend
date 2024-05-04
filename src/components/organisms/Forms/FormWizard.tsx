@@ -2,8 +2,10 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import PageContainer from "@/components/container/PageContainer";
 import {
+  Alert,
   Box,
   Button,
+  Stack,
   Step,
   StepLabel,
   Stepper,
@@ -14,12 +16,15 @@ import React from "react";
 import CollapsibleForm from "./CollapsibleForm";
 import FormSeparator from "./FormSeparator";
 import { useRouter } from "next/router";
+import AlertSubmmit from "@/components/atoms/alert/AlertSubmmit";
 
 const steps = ["Cuenta", "Perfil", "Confirmar y Enviar"];
 
 const FormWizard = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [error, setError] = React.useState<any>(null);
+  const [success, setSuccess] = React.useState<any>(false);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -30,26 +35,26 @@ const FormWizard = () => {
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("Required"),
-    password: Yup.string().required("Required"),
-    email: Yup.string().email("Invalid email").required("Required"),
+    username: Yup.string().required("Nombre de usuario es requerido"),
+    password: Yup.string().required("Contraseña es requerida"),
+    email: Yup.string().email("Invalid email").required("Email es requerido"),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), ""], "Passwords must match")
-      .required("Required"),
-    firstName: Yup.string().required("Required"),
-    lastName: Yup.string().required("Required"),
-    phoneNumber: Yup.string().required("Required"),
-    country: Yup.string().required("Required"),
-    birthDate: Yup.date().required("Required"),
-    fullName: Yup.string().required("Required"),
-    phone: Yup.string().required("Required"),
-    address: Yup.string().required("Required"),
-    postalCode: Yup.string().required("Required"),
-    city: Yup.string().required("Required"),
-    cardNumber: Yup.string().required("Required"),
-    cardHolderName: Yup.string().required("Required"),
-    cardExpirationDate: Yup.string().required("Required"),
-    cardCVV: Yup.string().required("Required"),
+      .oneOf([Yup.ref("password"), ""], "Las contraseñas no coinciden")
+      .required("Contraseña es requerida"),
+    firstName: Yup.string().required("Nombre es requerido"),
+    lastName: Yup.string().required("Apellido es requerido"),
+    phoneNumber: Yup.string().required("Número de teléfono es requerido"),
+    country: Yup.string().required("Pais es requerido"),
+    birthDate: Yup.date().required("Fecha de nacimiento es requerido"),
+    fullName: Yup.string().required("Nombre completo es requerido"),
+    phone: Yup.string().required("Número de teléfono es requerido"),
+    address: Yup.string().required("Dirección es requerido"),
+    postalCode: Yup.string().required("Codigo postal es requerido"),
+    city: Yup.string().required("Ciudad es requerido"),
+    cardNumber: Yup.string().required("Número de tarjeta es requerido"),
+    cardHolderName: Yup.string().required("Número de teléfono es requerido"),
+    cardExpirationDate: Yup.string().required("Requerido"),
+    cardCVV: Yup.string().required("Requerido"),
   });
 
   const initialValues = {
@@ -74,6 +79,7 @@ const FormWizard = () => {
   };
 
   const handleSubmit = async (values: any, { setSubmitting }: any) => {
+    setError(null);
     const dataToSend = {
       username: values.username,
       firstName: values.firstName,
@@ -104,74 +110,94 @@ const FormWizard = () => {
         dataToSend
       );
       console.log("Usuario registrado:", response.data);
-      handleNext();
-      // router.push("/iniciar-sesion");
-    } catch (error) {
+      setSuccess(!success);
+    } catch (error: any) {
       console.error("Error al registrar usuario:", error);
+      setError(error.response.data.message);
     }
     setSubmitting(false);
   };
 
   return (
-    <PageContainer>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <Stepper activeStep={activeStep}>
-              {steps.map((label, index) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-            {activeStep === 0 && <FormSeparator />}
-            {activeStep === 1 && <CollapsibleForm />}
-            {activeStep === 2 && (
-              <Box sx={{ mt: 2 }}>
-                <Typography>
-                  Revisa y confirma tus datos antes de enviar.
-                </Typography>
-              </Box>
-            )}
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
-                disabled={activeStep === 0}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleBack();
-                }}
-              >
-                Atrás
-              </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
-              {activeStep < steps.length - 1 ? (
+    <>
+      <PageContainer>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <Stepper activeStep={activeStep}>
+                {steps.map((label, index) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+              {activeStep === 0 && <FormSeparator />}
+              {activeStep === 1 && <CollapsibleForm />}
+              {activeStep === 2 && (
+                <Box sx={{ mt: 2 }}>
+                  <Typography>
+                    Revisa y confirma tus datos antes de enviar.
+                  </Typography>
+                  {error && (
+                    <>
+                      <Stack spacing={2} mt={3}>
+                        <Alert severity="error">{error}</Alert>
+                      </Stack>
+                    </>
+                  )}
+                </Box>
+              )}
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Button
+                  disabled={activeStep === 0}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNext();
+                    handleBack();
                   }}
                 >
-                  Siguiente
+                  Atrás
                 </Button>
-              ) : (
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disabled={isSubmitting}
-                >
-                  Confirmar y Enviar
-                </Button>
-              )}
-            </Box>
-          </Form>
-        )}
-      </Formik>
-    </PageContainer>
+                <Box sx={{ flex: "1 1 auto" }} />
+                {activeStep < steps.length - 1 ? (
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNext();
+                    }}
+                  >
+                    Siguiente
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={isSubmitting}
+                  >
+                    Confirmar y Enviar
+                  </Button>
+                )}
+              </Box>
+            </Form>
+          )}
+        </Formik>
+      </PageContainer>
+      <AlertSubmmit
+        open={success}
+        handleClose={() => {
+          setSuccess(!success);
+          handleNext();
+          router.push("/iniciar-sesion");
+        }}
+        title={"Usuario creado"}
+        severity={"success"}
+        duration={2000}
+      />
+    </>
   );
 };
 
