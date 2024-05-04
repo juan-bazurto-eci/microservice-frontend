@@ -59,7 +59,7 @@ const AccountTab = () => {
             <Box textAlign="center" display="flex" justifyContent="center">
               <Box>
                 <Avatar
-                  src={"/images/profile/user-1.jpg"}
+                  src={"./images/profile/user-1.jpg"}
                   alt={"user1"}
                   sx={{ width: 120, height: 120, margin: "0 auto" }}
                 />

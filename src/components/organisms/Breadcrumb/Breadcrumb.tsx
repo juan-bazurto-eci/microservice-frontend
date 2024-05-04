@@ -76,7 +76,7 @@ const Breadcrumb = ({ subtitle, items, title, children }: BreadCrumbType) => (
           <>
             <Box sx={{ top: "-10px", position: "absolute" }}>
               <Image
-                src={"/images/logos/logo.png"}
+                src={"./images/logos/logo.png"}
                 alt={"breadcrumbImg"}
                 width={300}
                 height={115}

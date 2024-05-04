@@ -40,7 +40,7 @@ const Profile = () => {
         onClick={handleClick2}
       >
         <Avatar
-          src={"/images/profile/user-1.jpg"}
+          src={"./images/profile/user-1.jpg"}
           alt={"ProfileImg"}
           sx={{
             width: 35,
@@ -69,7 +69,7 @@ const Profile = () => {
         <Typography variant="h5">Perfil del usuario</Typography>
         <Stack direction="row" py={3} spacing={2} alignItems="center">
           <Avatar
-            src={"/images/profile/user-1.jpg"}
+            src={"./images/profile/user-1.jpg"}
             alt={"ProfileImg"}
             sx={{ width: 95, height: 95 }}
           />
@@ -102,7 +102,7 @@ const Profile = () => {
             href: "/configuracion-cuenta",
             title: "Mi perfil",
             subtitle: "Configuración de la cuenta",
-            icon: "/images/svgs/icon-account.svg",
+            icon: "./images/svgs/icon-account.svg",
           },
         ].map((profile) => (
           <Box key={profile.title}>

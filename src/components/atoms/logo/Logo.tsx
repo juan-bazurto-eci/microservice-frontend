@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Logo = ({
-  logo = "/images/logos/logo.png",
+  logo = "./images/logos/logo.png",
   height = 100,
   width = 300,
   href = "/",
@@ -30,7 +30,7 @@ const Logo = ({
   return (
     <LinkStyled href={href}>
       {customizer.isCollapse && !customizer.isSidebarHover ? (
-        <Image src="/favicon.ico" alt="logo" height={38} width={38} priority />
+        <Image src="./favicon.ico" alt="logo" height={38} width={38} priority />
       ) : (
         <Image src={logo} alt="logo" height={height} width={width} priority />
       )}
