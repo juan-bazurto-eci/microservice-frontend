@@ -214,7 +214,7 @@ const ProductFilter = () => {
             </ListItemButton>
           );
         })}
-        <Divider></Divider>
+        <Divider />
         {/* ------------------------------------------- */}
         {/* Filter By Gender */}
         {/* ------------------------------------------- */}
@@ -239,7 +239,7 @@ const ProductFilter = () => {
             ))}
           </FormGroup>
         </Box>
-        <Divider></Divider>
+        <Divider />
         {/* ------------------------------------------- */}
         {/* Filter By Pricing */}
         {/* ------------------------------------------- */}
@@ -263,7 +263,7 @@ const ProductFilter = () => {
             ))}
           </FormGroup>
         </Box>
-        <Divider></Divider>
+        <Divider />
         <Typography variant="h6" px={3} mt={3} pb={2}>
           Por colores
         </Typography>
@@ -294,12 +294,12 @@ const ProductFilter = () => {
                   </Avatar>
                 );
               } else {
-                return <Box key={curColor} sx={{ display: "none" }}></Box>;
+                return <Box key={curColor} sx={{ display: "none" }} />;
               }
             })}
           </Stack>
         </Box>
-        <Divider></Divider>
+        <Divider />
         {/* ------------------------------------------- */}
         {/* Reset */}
         {/* ------------------------------------------- */}

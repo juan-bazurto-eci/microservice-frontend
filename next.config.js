@@ -1,9 +1,5 @@
-import million from "million/compiler";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-  env: {},
   reactStrictMode: true,
   pageExtensions: [
     "mdx",
@@ -22,10 +18,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
 };
 
-const millionConfig = {
-  auto: true, // if you're using RSC: auto: { rsc: true },
-};
-
-export default million.next(nextConfig, millionConfig);
+module.exports = nextConfig;
