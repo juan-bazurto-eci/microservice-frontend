@@ -32,7 +32,7 @@ const AuthLogin = ({ title, subtitle, subtext }: any) => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          "http://localhost:8080/client/login",
+          `${process.env.NEXT_PUBLIC_URL}/client/login`,
           {
             email: values.username,
             password: values.password,

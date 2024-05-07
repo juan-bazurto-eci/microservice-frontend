@@ -153,7 +153,7 @@ const ProductsData = [
     stock: true,
     qty: 1,
     colors: ["#00AB55", "#000000"],
-    photo: "/images/products/s9.jpg",
+    photo: "./images/products/s9.jpg",
     id: 9,
     created: sub(new Date(), { days: 8, hours: 6, minutes: 20 }),
     description: chance.paragraph({ sentences: 2 }),

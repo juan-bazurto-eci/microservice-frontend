@@ -13,12 +13,13 @@ export interface User {
     postalCode: string;
     city: string;
   };
-  paymentMethod: {};
+  paymentMethod: { cardNumber: string };
 }
 
 export interface AuthContextType {
   user: User | null;
   login: (userData: User) => void;
+  updateUser: (updatedUserData: User) => void;
   logout: () => void;
   isUserLoggedIn: () => boolean;
   getUserData: () => User | null;

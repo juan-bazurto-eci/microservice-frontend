@@ -8,7 +8,9 @@ import {
   Avatar,
   Button,
 } from "@mui/material";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 // images
 import { Stack } from "@mui/system";
 import BlankCard from "@/components/molecules/shared/BlankCard";
@@ -38,11 +40,47 @@ const AccountTab = () => {
 
   if (!user) return null;
 
-  const [location, setLocation] = React.useState(user?.country);
+  const validationSchema = Yup.object({
+    firstName: Yup.string().required("Requerido"),
+    lastName: Yup.string().required("Requerido"),
+    country: Yup.string().required("Requerido"),
+    email: Yup.string().email("Invalid email").required("Requerido"),
+    phoneNumber: Yup.string().required("Requerido"),
+    address: Yup.string().required("Requerido"),
+  });
 
-  const handleChange1 = (event: any) => {
-    setLocation(event.target.value);
-  };
+  const formik = useFormik({
+    initialValues: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      country: user.country,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      address: user.shippingAddress.address,
+    },
+    validationSchema,
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      const updateData = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        country: values.country,
+        email: values.email,
+        phoneNumber: values.phoneNumber,
+        shippingAddress: { ...user.shippingAddress, address: values.address },
+        username: user.username,
+        birthDate: user.birthDate,
+      };
+      try {
+        await axios.put(
+          `${process.env.NEXT_PUBLIC_URL}/client/${user.username}`,
+          updateData
+        );
+      } catch (error) {
+        console.error("Error updating profile:", error);
+      }
+    },
+  });
 
   return (
     <Grid container spacing={3}>
@@ -147,57 +185,56 @@ const AccountTab = () => {
             <Typography color="textSecondary" mb={3}>
               Para cambiar tus datos personales, edítalos y guárdalos desde aquí
             </Typography>
-            <form>
+            <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={3}>
+                {/* Name */}
                 <Grid item xs={12} sm={6}>
-                  <CustomFormLabel
-                    sx={{
-                      mt: 0,
-                    }}
-                    htmlFor="text-name"
-                  >
-                    Nombre
-                  </CustomFormLabel>
+                  <CustomFormLabel htmlFor="firstName">Nombre</CustomFormLabel>
                   <CustomTextField
-                    id="text-name"
-                    value={user.firstName}
+                    id="firstName"
+                    name="firstName"
                     variant="outlined"
                     fullWidth
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.firstName &&
+                      Boolean(formik.errors.firstName)
+                    }
+                    helperText={
+                      formik.touched.firstName && formik.errors.firstName
+                    }
                   />
                 </Grid>
+                {/* Last Name */}
                 <Grid item xs={12} sm={6}>
-                  {/* 2 */}
-                  <CustomFormLabel
-                    sx={{
-                      mt: 0,
-                    }}
-                    htmlFor="text-store-name"
-                  >
-                    Apellido
-                  </CustomFormLabel>
+                  <CustomFormLabel htmlFor="lastName">Apellido</CustomFormLabel>
                   <CustomTextField
-                    id="text-store-name"
-                    value={user.lastName}
+                    id="lastName"
+                    name="lastName"
                     variant="outlined"
                     fullWidth
+                    value={formik.values.lastName}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.lastName && Boolean(formik.errors.lastName)
+                    }
+                    helperText={
+                      formik.touched.lastName && formik.errors.lastName
+                    }
                   />
                 </Grid>
+                {/* Country */}
                 <Grid item xs={12} sm={6}>
-                  {/* 3 */}
-                  <CustomFormLabel
-                    sx={{
-                      mt: 0,
-                    }}
-                    htmlFor="text-location"
-                  >
-                    País
-                  </CustomFormLabel>
+                  <CustomFormLabel htmlFor="country">País</CustomFormLabel>
                   <CustomSelect
+                    name="country"
                     fullWidth
-                    id="text-location"
-                    variant="outlined"
-                    value={location}
-                    onChange={handleChange1}
+                    value={formik.values.country}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.country && Boolean(formik.errors.country)
+                    }
                   >
                     {locations.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
@@ -206,74 +243,85 @@ const AccountTab = () => {
                     ))}
                   </CustomSelect>
                 </Grid>
+                {/* Email */}
                 <Grid item xs={12} sm={6}>
-                  {/* 5 */}
-                  <CustomFormLabel
-                    sx={{
-                      mt: 0,
-                    }}
-                    htmlFor="text-email"
-                  >
-                    Email
-                  </CustomFormLabel>
+                  <CustomFormLabel htmlFor="email">Email</CustomFormLabel>
                   <CustomTextField
-                    id="text-email"
-                    value={user.email}
+                    id="email"
+                    name="email"
                     variant="outlined"
                     fullWidth
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
                   />
                 </Grid>
+                {/* Phone Number */}
                 <Grid item xs={12} sm={6}>
-                  {/* 6 */}
-                  <CustomFormLabel
-                    sx={{
-                      mt: 0,
-                    }}
-                    htmlFor="text-phone"
-                  >
+                  <CustomFormLabel htmlFor="phoneNumber">
                     Teléfono
                   </CustomFormLabel>
                   <CustomTextField
-                    id="text-phone"
-                    value={user.phoneNumber}
+                    id="phoneNumber"
+                    name="phoneNumber"
                     variant="outlined"
                     fullWidth
+                    value={formik.values.phoneNumber}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.phoneNumber &&
+                      Boolean(formik.errors.phoneNumber)
+                    }
+                    helperText={
+                      formik.touched.phoneNumber && formik.errors.phoneNumber
+                    }
                   />
                 </Grid>
+                {/* Address */}
                 <Grid item xs={12}>
-                  {/* 7 */}
-                  <CustomFormLabel
-                    sx={{
-                      mt: 0,
-                    }}
-                    htmlFor="text-address"
-                  >
-                    Dirección
-                  </CustomFormLabel>
+                  <CustomFormLabel htmlFor="address">Dirección</CustomFormLabel>
                   <CustomTextField
-                    id="text-address"
-                    value={user.shippingAddress.address}
+                    id="address"
+                    name="address"
                     variant="outlined"
                     fullWidth
+                    value={formik.values.address}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.address && Boolean(formik.errors.address)
+                    }
+                    helperText={formik.touched.address && formik.errors.address}
                   />
                 </Grid>
               </Grid>
+              {/* <Stack
+                direction="row"
+                spacing={2}
+                sx={{ justifyContent: "end" }}
+                mt={3}
+              >
+                <Button
+                  size="large"
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  disabled={!formik.isValid || formik.isSubmitting}
+                >
+                  Guardar
+                </Button>
+                <Button
+                  size="large"
+                  variant="text"
+                  color="error"
+                  onClick={() => formik.resetForm()}
+                >
+                  Cancelar
+                </Button>
+              </Stack> */}
             </form>
           </CardContent>
         </BlankCard>
-        {/* <Stack
-          direction="row"
-          spacing={2}
-          sx={{ justifyContent: "end" }}
-          mt={3}
-        >
-          <Button size="large" variant="contained" color="primary">
-            Guardar
-          </Button>
-          <Button size="large" variant="text" color="error">
-            Cancelar
-          </Button>
-        </Stack> */}
       </Grid>
     </Grid>
   );

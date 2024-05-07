@@ -106,7 +106,7 @@ const FormWizard = () => {
     try {
       console.log(dataToSend);
       const response = await axios.post(
-        "http://localhost:8080/client",
+        `${process.env.NEXT_PUBLIC_URL}/client`,
         dataToSend
       );
       console.log("Usuario registrado:", response.data);

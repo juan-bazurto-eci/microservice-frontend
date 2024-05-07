@@ -1,6 +1,7 @@
 import Cart from "@/components/molecules/cart/Cart";
 import Profile from "@/components/molecules/profile/Profile";
 import MobileRightSidebar from "@/components/molecules/sidebar/MobileRightSidebar";
+import Navigation from "@/components/molecules/navigation/Navigation";
 import { useAuth } from "@/context/AuthContext";
 import { AppState, useSelector } from "@/store/Store";
 import {
@@ -42,7 +43,11 @@ const Header = () => {
         {/* ------------------------------------------- */}
         {/* Toggle Button Sidebar */}
         {/* ------------------------------------------- */}
-        {lgUp ? <>{/* <Navigation /> */}</> : null}
+        {lgUp ? (
+          <>
+            <Navigation />
+          </>
+        ) : null}
 
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
