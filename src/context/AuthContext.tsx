@@ -6,6 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import { AuthContextType, User } from "../types/authTypes";
+import { useRouter } from "next/router";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -15,7 +16,7 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
-
+  const router = useRouter();
   useEffect(() => {
     const userData = localStorage.getItem("userData");
     if (userData) {
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const logout = () => {
     localStorage.removeItem("userData");
     setUser(null);
+    router.push("/");
   };
 
   const isUserLoggedIn = () => user !== null;
